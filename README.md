@@ -1,2 +1,5 @@
 # Inception-v4
-Implementation of Inception-v4 architecture in Keras.
+[![License](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/ShobhitLamba/Inception-v4/blob/master/LICENSE)
+
+
+Implementation of Inception-v4 architecture in Keras as given in the paper: ["Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning" by Christian Szegedy, Sergey Ioffe, Vincent Vanhoucke](https://arxiv.org/pdf/1602.07261v1.pdf)
