@@ -27,7 +27,7 @@ def stem(input):
     x = conv_block(x, 32, 3, 3, padding = "same") # 147 * 147 * 32
     x = conv_block(x, 64, 3, 3) # 147 * 147 * 64
 
-    x1 = MaxPooling2D((3, 3), strides=(2, 2), padding = "same")(x)
+    x1 = MaxPooling2D((3, 3), strides = (2, 2), padding = "same")(x)
     x2 = conv_block(x, 96, 3, 3, strides = (2, 2), padding = "same")
 
     x = concatenate([x1, x2], axis = -1) # 73 * 73 * 160
