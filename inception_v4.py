@@ -43,6 +43,7 @@ def stem(input):
     x = concatenate([x1, x2], axis = -1) # 71 * 71 * 192
 
     x1 = conv_block(x, 192, 3, 3, strides = (2, 2), padding = "same")
+    
     x2 = MaxPooling2D((3, 3), strides = (2, 2), padding = "same")(x)
 
     x = concatenate([x1, x2], axis = -1) # 35 * 35 * 384
@@ -114,16 +115,16 @@ def inception_C(input):
     
     return merged
 
-def reduction_A(input):
+def reduction_A(input, k = 192, l = 224, m = 256, n = 384):
     '''Architecture of a 35 * 35 to 17 * 17 Reduction_A block.'''
 
     ra1 = MaxPooling2D((3, 3), strides = (2, 2), padding = "same")(input)
     
-    ra2 = conv_block(input, 384, 3, 3, strides = (2, 2), padding = "same")
+    ra2 = conv_block(input, n, 3, 3, strides = (2, 2), padding = "same")
 
-    ra3 = conv_block(input, 192, 1, 1)
-    ra3 = conv_block(ra3, 224, 3, 3)
-    ra3 = conv_block(ra3, 256, 3, 3, strides = (2, 2), padding = "same")
+    ra3 = conv_block(input, k, 1, 1)
+    ra3 = conv_block(ra3, l, 3, 3)
+    ra3 = conv_block(ra3, m, 3, 3, strides = (2, 2), padding = "same")
 
     merged = concatenate([ra1, ra2, ra3], axis = -1)
     
@@ -160,7 +161,7 @@ def inception_v4(nb_classes = 1001, load_weights = True):
         # Output: 35 * 35 * 384
         
     # Reduction A
-    x = reduction_A(x) # Output: 17 * 17 * 1024
+    x = reduction_A(x, k = 192, l = 224, m = 256, n = 384) # Output: 17 * 17 * 1024
 
     # 7 x Inception B
     for i in range(7):
